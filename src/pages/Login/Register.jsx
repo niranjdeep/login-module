@@ -6,6 +6,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
+    email: "",
     location: "",
     businessName: "",
     businessType: "supplier",
@@ -21,6 +22,16 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const existingIndex = users.findIndex((user) => user.mobile === formData.mobile);
+
+    if (existingIndex >= 0) {
+      users[existingIndex] = formData;
+    } else {
+      users.push(formData);
+    }
+
+    localStorage.setItem("users", JSON.stringify(users));
     alert("Registration Successful");
   };
 
@@ -41,6 +52,13 @@ const Register = () => {
             type="text"
             name="mobile"
             placeholder="Mobile Number"
+            onChange={handleChange}
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Mail ID"
             onChange={handleChange}
           />
 
