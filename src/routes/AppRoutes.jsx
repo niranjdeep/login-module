@@ -10,6 +10,7 @@ import SupplierDashboard from "../pages/Supplier/Dashboard";
 import VendorDashboard from "../pages/Vendor/Dashboard";
 
 import ProtectedRoute from "../components/ProtectedRoute";
+import Profile from "../pages/Profile";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/verify-otp" element={<VerifyOTP />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/Profile" element={<Profile/>} />
 
       <Route
         path="/admin/dashboard"
@@ -47,8 +49,17 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+  path="/profile"
+  element={
+    <ProtectedRoute>
+      <Profile />
+    </ProtectedRoute>
+  }
+/>
 
     </Routes>
+    
   );
 };
 
